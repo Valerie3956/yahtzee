@@ -1,0 +1,133 @@
+body{
+    font-family: "Montserrat";
+}
+
+.header-light, .footer-light{
+    display:flex;
+    justify-content: space-around;
+    background-color: 		#9394a5 ;
+    padding: 30px;
+    font-size: 20px;
+}
+
+.header-dark, .footer-dark{
+    display:flex;
+    justify-content: space-around;
+    background-color: 		#282828;
+    color:#5e43f3;
+    padding: 30px;
+    font-size: 20px;
+}
+
+.container-light{
+    display: flex;
+    /* flex-direction: column; */
+    background-color: 	#d2d3db;
+    position:relative;
+    /* padding: 100px; */
+}
+
+.container-dark{
+    display: flex;
+    /* flex-direction: column; */
+    background-color: 	#121212;
+    position:relative;
+    /* padding: 100px; */
+}
+
+.dice{
+    width: 1000px;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    position:relative;
+    left: 20%;
+  }
+  
+  .number-light{
+    border: solid 3px black;
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height: 70px;
+    font-family: "Montserrat";
+    background-color: #d2d3db;
+  }
+
+  .number-dark{
+    border: solid 3px #5e43f3;
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height: 70px;
+    font-family: "Montserrat";
+    color: #5e43f3;
+    background-color: #121212;
+  }
+  
+  .roll-light{
+    font-family: "Montserrat";
+    height: 70px;
+    width: auto;
+    border: solid 3px black;
+    border-radius:5px;
+    background-color: #d2d3db;
+    font-size: 30px;
+    padding: 0px 20px 0px 20px;
+  
+  }
+
+  .roll-dark{
+    font-family: "Montserrat";
+    height: 70px;
+    width: auto;
+    border: solid 3px #5e43f3;
+    color: #5e43f3;
+    border-radius:5px;
+    background-color: #121212;
+    font-size: 30px;
+    padding: 0px 20px 0px 20px;
+  
+  }
+
+  /* scoresheet  */
+
+  .scoresheet{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+  }
+
+  .upper-light, .lower-light{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0px 50px 0px 50px;
+    background-color: #d2d3db;
+  }
+
+  .upper-dark, .lower-dark{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0px 50px 0px 50px;
+    background-color: #121212;
+    color:#5e43f3
+  }
+
+  .upper-light > input, .lower-light > input {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .upper-dark > input, .lower-dark > input {
+    margin: 10px;
+    padding: 10px;
+    background-color: #282828;
+    color:#5e43f3
+  }
