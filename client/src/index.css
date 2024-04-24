@@ -13,8 +13,8 @@ body{
 .header-dark, .footer-dark{
     display:flex;
     justify-content: space-around;
-    background-color: 		#282828;
-    color:#5e43f3;
+    background-color: 		#000000;
+    color:#a0a0a0;
     padding: 30px;
     font-size: 20px;
 }
@@ -30,7 +30,7 @@ body{
 .container-dark{
     display: flex;
     /* flex-direction: column; */
-    background-color: 	#121212;
+    background-color: 	#1e1e1e;
     position:relative;
     /* padding: 100px; */
 }
@@ -57,7 +57,7 @@ body{
   }
 
   .number-dark{
-    border: solid 3px #5e43f3;
+    border: solid 3px #a0a0a0;
     border-radius:5px;
     display:flex;
     justify-content: center;
@@ -65,10 +65,35 @@ body{
     width:70px;
     height: 70px;
     font-family: "Montserrat";
-    color: #5e43f3;
-    background-color: #121212;
+    color: #a0a0a0;
+    background-color: #1e1e1e;
   }
   
+  .selected-light{
+    border: solid 3px black;
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height: 70px;
+    font-family: "Montserrat";
+    background-color: #8186ae;
+  }
+
+  .selected-dark{
+    border: solid 3px #bb86fc;
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height: 70px;
+    font-family: "Montserrat";
+    color: #1e1e1e;
+    background-color: #bb86fc;
+  }
+
   .roll-light{
     font-family: "Montserrat";
     height: 70px;
@@ -85,10 +110,10 @@ body{
     font-family: "Montserrat";
     height: 70px;
     width: auto;
-    border: solid 3px #5e43f3;
-    color: #5e43f3;
+    border: solid 3px #a0a0a0;
+    color: #a0a0a0;
     border-radius:5px;
-    background-color: #121212;
+    background-color: #1e1e1e;
     font-size: 30px;
     padding: 0px 20px 0px 20px;
   
@@ -116,11 +141,11 @@ body{
     flex-direction: column;
     width: 400px;
     margin: 0px 50px 0px 50px;
-    background-color: #121212;
-    color:#5e43f3
+    background-color: #1e1e1e;
+    color:#a0a0a0
   }
 
-  .upper-light > input, .lower-light > input {
+  /* .upper-light > input, .lower-light > input {
     margin: 10px;
     padding: 10px;
   }
@@ -128,6 +153,50 @@ body{
   .upper-dark > input, .lower-dark > input {
     margin: 10px;
     padding: 10px;
-    background-color: #282828;
-    color:#5e43f3
+    background-color: #000000;
+    color:#a0a0a0
+  } */
+
+  .score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border : solid 1px red */
   }
+
+  .scoreText > h4 {
+    margin: 0px
+  }
+
+  .selectBtnfalse-light {
+    border: solid 3px black;
+    border-radius:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height: 70px;
+    font-family: "Montserrat";
+    background-color: #d2d3db;
+  }
+
+.selectBtntrue-light {
+  display:none
+}
+
+.selectBtnfalse-dark {
+  border: solid 1px #a0a0a0;
+  border-radius:5px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:70px;
+  height: 50px;
+  font-family: "Montserrat";
+  color: #a0a0a0;
+  background-color: #1e1e1e;
+}
+
+.selectBtntrue-dark {
+display:none
+}

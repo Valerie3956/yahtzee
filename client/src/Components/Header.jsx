@@ -7,7 +7,7 @@ export default function Header() {
 
     return (
         <div className = {`header-${color}`}>
-            <h3>Not Yahtzee because I'm pretty sure that's copyrighted</h3>
+            <h3>Yahtzee</h3>
             <button onClick = {toggleTheme} className = {`roll-${color}`}>Switch Theme</button>
         </div>
     )

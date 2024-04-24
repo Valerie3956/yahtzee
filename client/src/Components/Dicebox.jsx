@@ -6,9 +6,9 @@ import Die from "./Die.jsx"
 
 export default function Dicebox(props) {
 
-const {numbers, setNumbers} = React.useContext(ScoreContext)
+const {numbers, setNumbers, count, setCount} = React.useContext(ScoreContext)
 
-const [count, setCount] = React.useState(3)
+// const [count, setCount] = React.useState(3)
 
     const die = numbers.map(x => {
         return (
@@ -17,6 +17,7 @@ const [count, setCount] = React.useState(3)
                 id={x.id}
                 isSelected={x.isSelected}
                 handleClick={freeze}
+                
             />
         )
     })
@@ -36,7 +37,6 @@ const [count, setCount] = React.useState(3)
                         }
                     }
                 }
-                    //can I change my if statement into a ternary???
     
                 )
             })

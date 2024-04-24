@@ -7,9 +7,11 @@ export default function Die(props){
 
     const {color} = useContext(ThemeContext)
 
+    const change = props.isSelected? "selected" : "number"
+
     return(
         <div>
-        <h1 className = {`number-${color}`} onClick = {() => props.handleClick(props.id)}>{props.number}</h1>
+        <h1 className = {`${change}-${color}`} onClick = {() => props.handleClick(props.id)}>{props.number}</h1>
         </div>
     )
 }

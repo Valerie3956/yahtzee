@@ -7,33 +7,38 @@ function ScoreContextProvider(props) {
 
     //states
 
-    const [numbers, setNumbers] = React.useState([
+    const initNumbers = [
         {
-            value: 1,
+            value: null,
             isSelected: false,
             id: 1
         },
         {
-            value: 2,
+            value: null,
             isSelected: false,
             id: 2
         },
         {
-            value: 3,
+            value: null,
             isSelected: false,
             id: 3
         },
         {
-            value: 4,
+            value: null,
             isSelected: false,
             id: 4
         },
         {
-            value: 5,
+            value: null,
             isSelected: false,
             id: 5
         },
-    ])
+    ]
+
+    const [numbers, setNumbers] = React.useState(initNumbers)
+
+
+    const [count, setCount] = React.useState(3)
 
     const [score, setScore] = React.useState(0)
 
@@ -80,6 +85,16 @@ function ScoreContextProvider(props) {
         isSelected: false
     })
 
+    const [smallStraightValue, setSmallStraightValue] = React.useState({
+        value: 0,
+        isSelected: false
+    })
+
+    const [largeStraightValue, setLargeStraightValue] = React.useState({
+        value: 0,
+        isSelected: false
+    })
+
     const [yahtzeeValue, setYahtzeeValue] = React.useState({
         value: 0,
         isSelected: false,
@@ -91,6 +106,13 @@ function ScoreContextProvider(props) {
         isSelected: false
     })
 
+    const [lowerBonusValue, setLowerBonusValue] = React.useState({
+        value: 0,
+    })
+
+    const [totalLower, setTotalLower] = React.useState(0)
+    const [grandTotalValue, setGrandTotalValue] = React.useState(0)
+
     useEffect(() => {
         aces()
         twos()
@@ -98,16 +120,29 @@ function ScoreContextProvider(props) {
         fours()
         fives()
         sixes()
-        subtotalUpperFunc()
-        upperBonus()
-        totalUpperFunc()
         threeOfAKind()
         fourOfAKind()
         fullHouse()
+        smallStraight()
+        largeStraight()
         yahtzee()
         chance()
+        lowerBonus()
+        calculateScore()
     }, [numbers])
 
+
+    useEffect(() => {
+        if(totalUpper !== 0 && totalLower !== 0){
+            grandTotal()
+        }
+    }, [totalLower, totalUpper])
+
+    useEffect(() => {
+        if(subtotalUpper !==0){
+            totalUpperFunc()
+        }
+    }, [subtotalUpper, bonus])
     //aces
 
 
@@ -234,25 +269,27 @@ function ScoreContextProvider(props) {
 
     //total Upper
 
-    function subtotalUpperFunc() {
-        setSubtotalUpper(acesValue.value + twosValue.value + threesValue.value + foursValue.value + fivesValue.value + sixesValue.value)
+    
+    async function totalUpperFunc() {
+        if (
+            acesValue.isSelected &&
+            twosValue.isSelected &&
+            threesValue.isSelected &&
+            foursValue.isSelected &&
+            fivesValue.isSelected &&
+            sixesValue.isSelected
+        ) {
+            const subtotal = acesValue.value + twosValue.value + threesValue.value + foursValue.value + fivesValue.value + sixesValue.value;
+            setSubtotalUpper(subtotal);
+            if (subtotal >= 63) {
+                setBonus(35);
+            } else {
+                setBonus(0);
+            }
+            setTotalUpper(subtotal + bonus);
+        } 
     }
 
-    //bonus
-
-    function upperBonus() {
-        if (subtotalUpper >= 63) {
-            setBonus(35)
-        } else {
-            setBonus(0)
-        }
-    }
-
-    //total Upper plus bonus
-
-    function totalUpperFunc() {
-        setTotalUpper(subtotalUpper + bonus)
-    }
 
     //three of a kind
 
@@ -318,7 +355,14 @@ function ScoreContextProvider(props) {
             const diceValues = []
             numbers.map(x => diceValues.push(x.value))
             diceValues.sort((a, b) => a - b)
-            if ((diceValues[0] === diceValues[1] && diceValues[2] === diceValues[4]) ||
+            if(diceValues[0]===null){
+                setFullHouseValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value: 0
+                    }
+                })
+            }else if ((diceValues[0] === diceValues[1] && diceValues[2] === diceValues[4]) ||
             (diceValues[0] === diceValues[2] && diceValues[3] === diceValues[4])) {
                 setFullHouseValue(prevValue => {
                     return {
@@ -344,13 +388,54 @@ function ScoreContextProvider(props) {
             const diceValues = []
             numbers.map(x => diceValues.push(x.value))
             diceValues.sort((a, b) => a - b)
-            if((diceValues[0] + 1 === diceValues[1] && diceValues[1] + 1 === diceValues[2]) || (diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3]) || (diceValues[2] + 1 === diceValues[3] && diceValues[3] + 1 === diceValues[4])){
-                setSmallStraightValue
+            if((diceValues[0] + 1 === diceValues[1] && diceValues[1] + 1 === diceValues[2]) 
+            || (diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3]) 
+        || (diceValues[2] + 1 === diceValues[3] && diceValues[3] + 1 === diceValues[4])){
+                setSmallStraightValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value: 30
+                    }
+                })
+            } else {
+                setSmallStraightValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value: 0
+                    }
             }
-        }
+        )}
     }
+}
+    
+
 
     //large straight
+
+    function largeStraight(){
+        if (largeStraightValue.isSelected === false){
+            const diceValues = []
+            numbers.map(x => diceValues.push(x.value))
+            diceValues.sort((a, b) => a - b)
+            if((diceValues[0] + 1 === diceValues[1] && diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3] && diceValues[3] + 1 === diceValues[4])){
+                setLargeStraightValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value: 40
+                    }
+                })
+            } else {
+                setLargeStraightValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value: 0
+                    }
+            }
+        )}
+            }
+        }
+    
+
 
     //yahtzee
 
@@ -359,14 +444,24 @@ function ScoreContextProvider(props) {
             const diceValues = []
             numbers.map(x => diceValues.push(x.value))
             diceValues.sort((a, b) => a - b)
-            if (diceValues[0] === diceValues[4]) {
+
+            if (diceValues[0] === null){
+                setYahtzeeValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value: 0
+                    }
+                })
+            } 
+            else if (diceValues[0] === diceValues[4]) {
                 setYahtzeeValue(prevValue => {
                     return {
                         ...prevValue,
                         value: 50,
                     }
                 })
-            } else {
+            } 
+            else {
                 setYahtzeeValue(prevValue => {
                     return {
                         ...prevValue,
@@ -396,11 +491,123 @@ function ScoreContextProvider(props) {
 
     //bonus
 
+    function lowerBonus(){
+        if(yahtzeeValue.isSelected === true && yahtzeeValue.value === 50){
+            const diceValues = []
+            numbers.map(x => diceValues.push(x.value))
+            diceValues.sort((a, b) => a - b)
+            if(diceValues[0]=== null){
+                setLowerBonusValue(prevValue => prevValue)
+            }else if (diceValues[0] === diceValues[4]) {
+                setLowerBonusValue(prevValue => {
+                    return {
+                        ...prevValue,
+                        value : prevValue.value + 100
+
+                    }
+                })
+            }
+        }
+    }
+
     //total Lower
 
-    //total Upper
+    async function totalLowerFunc() {
+        return new Promise((resolve, reject) => {
+            if (
+                threeOfAKindValue.isSelected &&
+                fourOfAKindValue.isSelected &&
+                fullHouseValue.isSelected &&
+                smallStraightValue.isSelected &&
+                largeStraightValue.isSelected &&
+                yahtzeeValue.isSelected &&
+                chanceValue.isSelected
+            ) {
+                setTotalLower(threeOfAKindValue.value + fourOfAKindValue.value + fullHouseValue.value + smallStraightValue.value + largeStraightValue.value + yahtzeeValue.value + chanceValue.value + lowerBonusValue.value);
+                resolve();
+            } 
+        });
+    }
+    
+    async function grandTotal() {
+        return new Promise((resolve, reject) => {
+            setGrandTotalValue(totalUpper + totalLower);
+            resolve();
+        });
+    }
+    
 
-    //grand total
+//calculate score
+async function calculateScore() {
+    try {
+        await totalUpperFunc();
+        await totalLowerFunc();
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+
+
+
+
+    //select
+
+    function select(key) {
+        setCount(3)
+        setNumbers(initNumbers)
+        calculateScore()
+        switch (key) {
+            case "aces":
+                setAcesValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "twos":
+                setTwosValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "threes":
+                setThreesValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "fours":
+                setFoursValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "fives":
+                setFivesValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "sixes":
+                setSixesValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "threeOfAKind":
+                setThreeOfAKindValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "fourOfAKind":
+                setFourOfAKindValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "fullHouse":
+                setFullHouseValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "smallStraight":
+                setSmallStraightValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "largeStraight":
+                setLargeStraightValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "yahtzee":
+                setYahtzeeValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "chance":
+                setChanceValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            case "lowerBonus":
+                setLowerBonusValue(prevValue => ({ ...prevValue, isSelected: true }));
+                break;
+            default:
+                console.error(`Invalid state key: ${key}`);
+                break;
+        }
+    }
+
+
+
 
     return (
         <ScoreContext.Provider
@@ -420,8 +627,16 @@ function ScoreContextProvider(props) {
                 threeOfAKindValue,
                 fourOfAKindValue,
                 fullHouseValue,
+                smallStraightValue,
+                largeStraightValue,
                 yahtzeeValue,
-                chanceValue
+                chanceValue,
+                lowerBonusValue,
+                totalLower,
+                grandTotalValue,
+                select,
+                count,
+                setCount
             }}
 
         >
@@ -431,6 +646,6 @@ function ScoreContextProvider(props) {
     )
 
 
-}
 
+}
 export { ScoreContext, ScoreContextProvider }
