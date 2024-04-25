@@ -42,73 +42,42 @@ function ScoreContextProvider(props) {
 
     const [score, setScore] = React.useState(0)
 
-    const [acesValue, setAcesValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
-    const [twosValue, setTwosValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
-    const [threesValue, setThreesValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
-    const [foursValue, setFoursValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
-    const [fivesValue, setFivesValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
-    const [sixesValue, setSixesValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const initValue = {
+        value : 0,
+        isSelected : false
+    }
+
+const initYahtzee = {
+    value: 0,
+    isSelected: false,
+    count: 0
+}
+
+    const [acesValue, setAcesValue] = React.useState(initValue)
+    const [twosValue, setTwosValue] = React.useState(initValue)
+    const [threesValue, setThreesValue] = React.useState(initValue)
+    const [foursValue, setFoursValue] = React.useState(initValue)
+    const [fivesValue, setFivesValue] = React.useState(initValue)
+    const [sixesValue, setSixesValue] = React.useState(initValue)
     const [subtotalUpper, setSubtotalUpper] = React.useState(0)
     const [bonus, setBonus] = React.useState(0)
     const [totalUpper, setTotalUpper] = React.useState(0)
 
-    const [threeOfAKindValue, setThreeOfAKindValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const [threeOfAKindValue, setThreeOfAKindValue] = React.useState(initValue)
 
-    const [fourOfAKindValue, setFourOfAKindValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const [fourOfAKindValue, setFourOfAKindValue] = React.useState(initValue)
 
-    const [fullHouseValue, setFullHouseValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const [fullHouseValue, setFullHouseValue] = React.useState(initValue)
 
-    const [smallStraightValue, setSmallStraightValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const [smallStraightValue, setSmallStraightValue] = React.useState(initValue)
 
-    const [largeStraightValue, setLargeStraightValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const [largeStraightValue, setLargeStraightValue] = React.useState(initValue)
 
-    const [yahtzeeValue, setYahtzeeValue] = React.useState({
-        value: 0,
-        isSelected: false,
-        count: 0
-    })
+    const [yahtzeeValue, setYahtzeeValue] = React.useState(initYahtzee)
 
-    const [chanceValue, setChanceValue] = React.useState({
-        value: 0,
-        isSelected: false
-    })
+    const [chanceValue, setChanceValue] = React.useState(initValue)
 
-    const [lowerBonusValue, setLowerBonusValue] = React.useState({
-        value: 0,
-    })
+    const [lowerBonusValue, setLowerBonusValue] = React.useState(0)
 
     const [totalLower, setTotalLower] = React.useState(0)
     const [grandTotalValue, setGrandTotalValue] = React.useState(0)
@@ -133,7 +102,18 @@ function ScoreContextProvider(props) {
 
 
     useEffect(() => {
-        if(totalUpper !== 0 && totalLower !== 0){
+        if(     acesValue.isSelected &&
+            twosValue.isSelected &&
+            threesValue.isSelected &&
+            foursValue.isSelected &&
+            fivesValue.isSelected &&
+            sixesValue.isSelected && threeOfAKindValue.isSelected &&
+            fourOfAKindValue.isSelected &&
+            fullHouseValue.isSelected &&
+            smallStraightValue.isSelected &&
+            largeStraightValue.isSelected &&
+            yahtzeeValue.isSelected &&
+            chanceValue.isSelected){
             grandTotal()
         }
     }, [totalLower, totalUpper])
@@ -388,9 +368,9 @@ function ScoreContextProvider(props) {
             const diceValues = []
             numbers.map(x => diceValues.push(x.value))
             diceValues.sort((a, b) => a - b)
-            if((diceValues[0] + 1 === diceValues[1] && diceValues[1] + 1 === diceValues[2]) 
-            || (diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3]) 
-        || (diceValues[2] + 1 === diceValues[3] && diceValues[3] + 1 === diceValues[4])){
+            if((diceValues[0] + 1 === diceValues[1] && diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3]) 
+            || (diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3] && diceValues[3] + 1 === diceValues[4]) 
+        ){
                 setSmallStraightValue(prevValue => {
                     return {
                         ...prevValue,
@@ -499,13 +479,7 @@ function ScoreContextProvider(props) {
             if(diceValues[0]=== null){
                 setLowerBonusValue(prevValue => prevValue)
             }else if (diceValues[0] === diceValues[4]) {
-                setLowerBonusValue(prevValue => {
-                    return {
-                        ...prevValue,
-                        value : prevValue.value + 100
-
-                    }
-                })
+                setLowerBonusValue(prevValue =>  prevValue + 100)
             }
         }
     }
@@ -523,7 +497,7 @@ function ScoreContextProvider(props) {
                 yahtzeeValue.isSelected &&
                 chanceValue.isSelected
             ) {
-                setTotalLower(threeOfAKindValue.value + fourOfAKindValue.value + fullHouseValue.value + smallStraightValue.value + largeStraightValue.value + yahtzeeValue.value + chanceValue.value + lowerBonusValue.value);
+                setTotalLower(threeOfAKindValue.value + fourOfAKindValue.value + fullHouseValue.value + smallStraightValue.value + largeStraightValue.value + yahtzeeValue.value + chanceValue.value + lowerBonusValue);
                 resolve();
             } 
         });
@@ -542,6 +516,7 @@ async function calculateScore() {
     try {
         await totalUpperFunc();
         await totalLowerFunc();
+        // await grandTotal()
     } catch (err) {
         console.error(err);
     }
@@ -606,7 +581,31 @@ async function calculateScore() {
         }
     }
 
+//reset
 
+function reset(){
+    setNumbers(initNumbers);
+    setCount(3);
+    setAcesValue(initValue);
+    setTwosValue(initValue);
+    setThreesValue(initValue);
+    setFoursValue(initValue);
+    setFivesValue(initValue);
+    setSixesValue(initValue);
+    setThreeOfAKindValue(initValue);
+    setFourOfAKindValue(initValue);
+    setFullHouseValue(initValue);
+    setSmallStraightValue(initValue);
+    setLargeStraightValue(initValue);
+    setYahtzeeValue(initYahtzee);
+    setChanceValue(initValue);
+    setLowerBonusValue(0);
+    setSubtotalUpper(0);
+    setBonus(0);
+    setTotalUpper(0);
+    setTotalLower(0);
+    setGrandTotalValue(0);
+}
 
 
     return (
@@ -636,7 +635,8 @@ async function calculateScore() {
                 grandTotalValue,
                 select,
                 count,
-                setCount
+                setCount,
+                reset
             }}
 
         >

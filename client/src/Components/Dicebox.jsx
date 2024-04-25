@@ -1,6 +1,6 @@
 import React, {useContext} from "react"
-import {ThemeContext} from "./ThemeContext"
-import {ScoreContext} from "./ScoreContext"
+import {ThemeContext} from "./ThemeContext.jsx"
+import {ScoreContext} from "./ScoreContext.jsx"
 import Die from "./Die.jsx"
 
 
