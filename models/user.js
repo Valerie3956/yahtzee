@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
 const userSchema = new Schema({
-    username : {
+  
         username:{
             type:String,
             required:true,
@@ -14,11 +14,7 @@ const userSchema = new Schema({
             type:String,
             required:true
         },
-        highScore : {
-            type : Number,
-            default : 0
-        }
-    }
+    
 })
 
 //pre save hook to encrypt password on signup
@@ -26,7 +22,7 @@ const userSchema = new Schema({
 userSchema.pre('save', function(next){
     const user = this
     if(!user.isModified('password')) return next()
-pt.hash(user.password, 10, (err, hash) => {
+bcrypt.hash(user.password, 10, (err, hash) => {
     if(err) return next(err)
     user.password = hash
 next()
