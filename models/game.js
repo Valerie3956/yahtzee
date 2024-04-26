@@ -10,7 +10,7 @@ const gameSchema = new Schema ({
     },
     user : {
         type : Schema.Types.ObjectId,
-        ref : User,
+        ref : 'User',
         required : true
     },
     date : {
@@ -18,5 +18,15 @@ const gameSchema = new Schema ({
         default : Date.now
     }
 })
+
+//make it so the password doesn't get sent to the FE
+
+gameSchema.methods.withoutPassword = function() {
+    const game = this.toObject();
+    if (game.user) {
+        delete game.user.password;
+    }
+    return game;
+};
 
 module.exports = mongoose.model("Game", gameSchema)

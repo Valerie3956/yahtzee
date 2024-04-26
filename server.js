@@ -32,8 +32,9 @@ app.use('/api/game', require('./routes/gameRouter'))
 
 app.get("/leaderboard", async(req, res, next) => {
     try {
-        const allGames = await Game.find()
-        return res.status(200).send(allGames)
+        const allGames = await Game.find().populate("user")
+        const gamesWithoutPasswords = allGames.map(game => game.withoutPassword())
+        return res.status(200).send(gamesWithoutPasswords)
     }
     catch(err){
         res.send(500)

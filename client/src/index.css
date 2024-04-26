@@ -200,3 +200,24 @@ body{
 .selectBtntrue-dark {
 display:none
 }
+
+/* leaderboard */
+
+.leaderboard{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.leader {
+  display:flex;
+  justify-content: space-between;
+  width : 40vw;
+  border: solid 1px red;
+}
+
+.leader > h4 {
+  margin : 3px
+}
+
