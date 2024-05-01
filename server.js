@@ -11,6 +11,7 @@ const Game = require('./models/game')
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(express.static(path.join(__dirname, "client", "dist")))ß
 
 
 const connectToDb = async () => {
@@ -28,7 +29,6 @@ app.use("/auth", require('./routes/authRouter'))
 app.use('/api', expressjwt({secret: SECRET, algorithms:["HS256"]}))
 app.use('/api/game', require('./routes/gameRouter'))
 
-app.use(express.static(path.join(__dirname, "client", "dist")))
 
 //get all games
 
