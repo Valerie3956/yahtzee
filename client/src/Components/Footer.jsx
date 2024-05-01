@@ -10,7 +10,7 @@ export default function Footer(){
 
     return(
         <div className = {`footer-${color}`}>
-                      <a href = "https://github.com/Valerie3956/yahtzee" >
+                      <a href = "https://github.com/Valerie3956/yahtzee" className = {`repoLink-${color}`}>
             <FontAwesomeIcon icon={faGithub} />
 </a>
         </div>

@@ -8,14 +8,16 @@ export default function Score(props){
 const disabled = props.isSelected? "true" : "false"
 
     return(
-        <div className = "score">
-            <div className = "scoreText">
+        <div className = {`scoreText-${disabled}-${color}`}>
+            <div>
 
-        <h4>{props.title}</h4>
-        <h4>{props.desc}</h4>
+        <h4 className = "scoreText">{props.title}</h4>
+        <h4 className = "scoreText">{props.desc}</h4>
             </div>
+            <div className = "scoreBtn">
         <h3>{props.score}</h3>
       {props.button && <button className = {`selectBtn${disabled}-${color}`} isdisabled = {disabled} onClick = {props.handleClick}>Select</button>}
+            </div>
         </div>
     )
 }

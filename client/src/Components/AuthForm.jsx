@@ -1,30 +1,34 @@
-import React from "react";
+import React, {useContext} from "react";
+import { ThemeContext } from "./ThemeContext"
+
 
 export default function AuthForm(props){
 
-    const {btnText, handleChange, handleSubmit, inputs : {username, password}, errMsg} = props
+    const {btnText, handleChange, handleSubmit, inputs : {username, password}, errMsg, logout} = props
 
+    const {color} = useContext(ThemeContext)
 
-
-
+const token = localStorage.getItem("token")
 
 
     return(
-        <div>
-            <form onSubmit={handleSubmit} className = "form">
+        <div className = "form">
+            <form onSubmit={handleSubmit}>
         <input 
           type="text" 
           value={username} 
           name="username" 
           onChange={handleChange} 
-          placeholder="Username"/>
+          placeholder="Username"
+          className = {`input-${color}`}/>
         <input 
           type="text" 
           value={password} 
           name="password" 
           onChange={handleChange} 
-          placeholder="Password"/>
-        <button className = "button">{ btnText }</button>
+          placeholder="Password"
+          className = {`input-${color}`}/>
+        <button className = {`roll-${color}`}>{ btnText }</button>
       {errMsg &&  <p>{errMsg}</p>}
       </form>
         </div>

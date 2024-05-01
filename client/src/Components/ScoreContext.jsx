@@ -37,7 +37,6 @@ function ScoreContextProvider(props) {
 
     const [numbers, setNumbers] = React.useState(initNumbers)
 
-
     const [count, setCount] = React.useState(3)
 
     const [score, setScore] = React.useState(0)
@@ -80,7 +79,10 @@ const initYahtzee = {
     const [lowerBonusValue, setLowerBonusValue] = React.useState(0)
 
     const [totalLower, setTotalLower] = React.useState(0)
+
     const [grandTotalValue, setGrandTotalValue] = React.useState(0)
+
+    const [gameComplete, setGameComplete] = React.useState(false)
 
     useEffect(() => {
         aces()
@@ -115,6 +117,7 @@ const initYahtzee = {
             yahtzeeValue.isSelected &&
             chanceValue.isSelected){
             grandTotal()
+            setGameComplete(true)
         }
     }, [totalLower, totalUpper])
 
@@ -605,6 +608,7 @@ function reset(){
     setTotalUpper(0);
     setTotalLower(0);
     setGrandTotalValue(0);
+    setGameComplete(false)
 }
 
 
@@ -636,7 +640,8 @@ function reset(){
                 select,
                 count,
                 setCount,
-                reset
+                reset,
+                gameComplete
             }}
 
         >

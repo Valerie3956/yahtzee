@@ -11,7 +11,7 @@ gameRouter.post('/', async(req, res, next) => {
         req.body.user = req.auth._id
         const game = await new Game(req.body)
         const savedGame = await game.save()
-        return res.status(200).send(game)
+        return res.status(200).send(savedGame)
     }
     catch(err){
         res.send(500)

@@ -15,15 +15,15 @@ export default function App() {
   return (
     <div>
       <ThemeContextProvider>
-        <UserProvider>
           <ScoreContextProvider>
+        <UserProvider>
             <Header />
             <Dicebox />
             <Scoresheet />
             <Leaderboard />
             <Footer />
-          </ScoreContextProvider>
         </UserProvider>
+          </ScoreContextProvider>
       </ThemeContextProvider>
     </div>
   )
