@@ -28,6 +28,8 @@ app.use("/auth", require('./routes/authRouter'))
 app.use('/api', expressjwt({secret: SECRET, algorithms:["HS256"]}))
 app.use('/api/game', require('./routes/gameRouter'))
 
+app.use(express.static(path.join(__dirname, "client", "dist")))
+
 //get all games
 
 app.get("/leaderboard", async(req, res, next) => {
@@ -46,5 +48,9 @@ app.use((err, req, res, next) => {
     console.log(err)
     return res.send({errMsg: err.message})
 })
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.listen(9000, () => console.log("the server is running on port 9000"))
