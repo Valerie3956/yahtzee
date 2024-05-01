@@ -11,7 +11,7 @@ const Game = require('./models/game')
 
 app.use(express.json())
 app.use(morgan('dev'))
-app.use(express.static(path.join(__dirname, "client", "dist")))ß
+app.use(express.static(path.join(__dirname, "client", "dist")))
 
 
 const connectToDb = async () => {
