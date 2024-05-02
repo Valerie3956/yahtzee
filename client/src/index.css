@@ -431,7 +431,7 @@ display:none
     font-size: 1.5rem;
     display:flex;
     align-items: center;
-    font-size: 1.5rem
+    font-size: 1.5rem;
   }
   
   .headerBtn {
@@ -512,6 +512,26 @@ display:none
   flex-direction: column;
 }
 
+.dice{
+  width : 90vw;
+  padding-top: 2rem;
+}
+
+.header-light{
+  padding-top  :2rem;
+  padding-bottom: 2rem;
+
+}
+
+.header-dark{
+padding-top  :2rem;
+padding-bottom: 2rem;
+}
+
+}
+
+
+
 @media only screen and (max-width: 800px){
 
   .header-light{
@@ -525,6 +545,8 @@ display:none
 .header-dark{
   flex-direction: column;
   height : auto;
+  padding-bottom: 2rem;
+  padding-top  :2rem;
   padding-bottom: 2rem;
 }
 
@@ -578,7 +600,8 @@ display:none
 }
 
 .dice{
-  width : 90vw
+  width : 90vw;
+  padding-top: 2rem;
 }
 
 .selected-light{
@@ -622,4 +645,3 @@ max-width : 85vw
 }
 
 
-}
