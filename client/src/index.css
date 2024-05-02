@@ -517,6 +517,7 @@ display:none
   .header-light{
     flex-direction: column;
     height : auto;
+    padding-top  :2rem;
     padding-bottom: 2rem;
 
 }
