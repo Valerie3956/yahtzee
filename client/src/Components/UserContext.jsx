@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios"
 import { ScoreContext } from "./ScoreContext";
 
@@ -13,8 +13,20 @@ token : localStorage.getItem("token") ||  "",
 userGames : JSON.parse(localStorage.getItem("userGames")) || []
 }
 
+const [count, setCount] = useState(0)
 const [userState, setUserState] = useState(initState)
 const [errMsg, setErrMsg] = useState("")
+const [leaderboard, setLeaderboard] = useState([])
+
+//initial leaderboard set
+
+useEffect(() => {
+    axios.get('/leaderboard')
+    .then(res => setLeaderboard(res.data))
+    .catch(err => console.log(err))
+  }, [count])
+
+  console.log(leaderboard)
 
 function signup(credentials){
 axios.post('/auth/signup', credentials)
@@ -74,14 +86,17 @@ gameAxios.interceptors.request.use(config => {
 
 function addGame(newGame){
     const game = {score : newGame}
+    console.log(game)
     gameAxios.post('/api/game', game)
     .then(res => 
         {setUserState(prevUserState => ({
         ...prevUserState,
         userGames : [...prevUserState.userGames, res.data]
-    })
+    }),
 )
+setCount(prevCount => prevCount + 1)
 reset()
+localStorage.setItem("userGames", JSON.stringify(userState.userGames))
 }
 )
 .catch(err => console.log(err.response.data.errMsg))
@@ -95,7 +110,8 @@ signup,
 login,
 logout,
 addGame,
-errMsg
+errMsg,
+leaderboard
 }}
 >
 {props.children}

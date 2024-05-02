@@ -6,20 +6,19 @@ import { ThemeContext } from "./ThemeContext"
 
 export default function Leaderboard(){
 
-const [leaderboard, setLeaderboard] = useState([])
+// const [leaderboard, setLeaderboard] = useState([])
 
 const {color} = useContext(ThemeContext)
 
-const {...userState} = useContext(UserContext)
+const {leaderboard, ...userState} = useContext(UserContext)
 
 const token = localStorage.getItem('token')
-// if(token){console.log(userState)}
 
-useEffect(() => {
-    axios.get('/leaderboard')
-    .then(res => setLeaderboard(res.data))
-    .catch(err => console.log(err))
-  }, [])
+// useEffect(() => {
+//     axios.get('/leaderboard')
+//     .then(res => setLeaderboard(res.data))
+//     .catch(err => console.log(err))
+//   }, [])
 
 const topTen = leaderboard.sort((a, b) => b.score - a.score).slice(0,10)
 

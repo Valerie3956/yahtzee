@@ -371,9 +371,11 @@ const initYahtzee = {
             const diceValues = []
             numbers.map(x => diceValues.push(x.value))
             diceValues.sort((a, b) => a - b)
-            if((diceValues[0] + 1 === diceValues[1] && diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3]) 
-            || (diceValues[1] + 1 === diceValues[2] && diceValues[2] + 1 === diceValues[3] && diceValues[3] + 1 === diceValues[4]) 
-        ){
+
+            if ((diceValues.includes(1) && diceValues.includes(2) && diceValues.includes(3) && diceValues.includes(4)) ||
+            (diceValues.includes(2) && diceValues.includes(3) && diceValues.includes(4) && diceValues.includes(5)) ||
+            (diceValues.includes(3) && diceValues.includes(4) && diceValues.includes(5) && diceValues.includes(6)))
+        {
                 setSmallStraightValue(prevValue => {
                     return {
                         ...prevValue,
@@ -390,7 +392,6 @@ const initYahtzee = {
         )}
     }
 }
-    
 
 
     //large straight
