@@ -513,8 +513,8 @@ display:none
 }
 
 .dice{
-  width : 90vw;
   padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .header-light{
@@ -601,6 +601,7 @@ padding-bottom: 2rem;
 .dice{
   width : 90vw;
   padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .selected-light{
