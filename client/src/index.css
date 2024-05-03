@@ -54,6 +54,8 @@ body{
     justify-content: space-around;
     align-items: center;
     position:relative;
+    padding-top : 2rem;
+    padding-bottom : 2rem
   }
   
   .number-light{
@@ -164,8 +166,6 @@ cursor : pointer;
 
   .scoresheet{
     position: relative;
-    /* left: 50%;
-    transform: translate(-50%); */
     display: flex;
   }
 
@@ -197,6 +197,11 @@ cursor : pointer;
     background-color: #1e1e1e;
     color:#a0a0a0
   }
+
+ .upper-light > h2, .upper-dark > h2, .lower-light > h2, .lower-dark > h2 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+ }
 
   .score {
     display: flex;
@@ -280,6 +285,12 @@ cursor : pointer;
 display:none
 }
 
+.scoreDesc {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+
 /* leaderboard */
 
 .leaderboard-light{
@@ -289,6 +300,7 @@ display:none
   justify-content: center;
   background-color: 	#d2d3db;
   position:relative;
+  min-height: 33vh;
 }
 
 .leaderboard-dark{
@@ -298,6 +310,12 @@ display:none
   background-color: 	#1e1e1e;
   position:relative;
   color:#a0a0a0;
+  min-height: 33vh;
+}
+
+.title-light, .title-dark {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .inner-leaderboard-light{
@@ -308,7 +326,8 @@ display:none
   margin: 2.5rem;
   border: solid 3px black;
   border-radius:5px;
-  width: 500px
+  width: 500px;
+  padding-bottom: 2rem;
 }
 
 .user-leaderboard-light{
@@ -320,6 +339,7 @@ display:none
   border: solid 3px black;
   border-radius:5px;
   width: 300px;
+   padding-bottom: 2rem;
 }
 
 .inner-leaderboard-dark{
@@ -330,7 +350,8 @@ display:none
   margin: 2.5rem;
   border: solid 3px #a0a0a0;
   border-radius:5px;
-  width: 500px
+  width: 500px;
+   padding-bottom: 2rem;
 }
 
 .user-leaderboard-dark{
@@ -341,7 +362,8 @@ display:none
   margin: 2.5rem;
   border: solid 3px #a0a0a0;
   border-radius:5px;
-  width: 300px
+  width: 300px;
+   padding-bottom: 2rem;
 }
 
 .leader-light {

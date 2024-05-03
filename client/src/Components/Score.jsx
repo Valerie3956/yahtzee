@@ -9,7 +9,7 @@ const disabled = props.isSelected? "true" : "false"
 
     return(
         <div className = {`scoreText-${disabled}-${color}`}>
-            <div>
+            <div className = "scoreDesc">
 
         <h4 className = "scoreText">{props.title}</h4>
         <h4 className = "scoreText">{props.desc}</h4>
