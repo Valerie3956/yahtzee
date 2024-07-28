@@ -21,7 +21,7 @@ const [leaderboard, setLeaderboard] = useState([])
 //initial leaderboard set
 
 useEffect(() => {
-    axios.get('/leaderboard')
+    axios.get('https://globalbackend-zued.onrender.com/leaderboard')
     .then(res => setLeaderboard(res.data))
     .catch(err => console.log(err))
   }, [count])
@@ -29,7 +29,7 @@ useEffect(() => {
   console.log(leaderboard)
 
 function signup(credentials){
-axios.post('/auth/signup', credentials)
+axios.post('https://globalbackend-zued.onrender.com/auth/signup', credentials)
 .then(res => {
     const {user, token} = res.data
     localStorage.setItem("token" , token)
@@ -44,7 +44,7 @@ axios.post('/auth/signup', credentials)
 }
 
 function login(credentials){
-    axios.post('/auth/login', credentials)
+    axios.post('https://globalbackend-zued.onrender.com/auth/login', credentials)
     .then(res => {
         const {user, token, userGames} = res.data
         localStorage.setItem("token" , token)
@@ -87,7 +87,7 @@ gameAxios.interceptors.request.use(config => {
 function addGame(newGame){
     const game = {score : newGame}
     console.log(game)
-    gameAxios.post('/api/game', game)
+    gameAxios.post('https://globalbackend-zued.onrender.com/api/game', game)
     .then(res => 
         {setUserState(prevUserState => ({
         ...prevUserState,

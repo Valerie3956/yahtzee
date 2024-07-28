@@ -15,7 +15,8 @@ export default function App() {
   return (
     <div>
       <ThemeContextProvider>
-          <ScoreContextProvider>
+        <div data-testid = "scoreContext">
+          <ScoreContextProvider >
         <UserProvider>
             <Header />
             <Dicebox />
@@ -24,6 +25,7 @@ export default function App() {
             <Footer />
         </UserProvider>
           </ScoreContextProvider>
+        </div>
       </ThemeContextProvider>
     </div>
   )

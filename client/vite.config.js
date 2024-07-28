@@ -5,6 +5,11 @@ const isDevEnv = false
 
 export default defineConfig({
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/Tests/setup.js'
+  },
   server: {
     proxy: {
       '/auth': {

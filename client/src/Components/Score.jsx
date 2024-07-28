@@ -15,7 +15,7 @@ const disabled = props.isSelected? "true" : "false"
         <h4 className = "scoreText">{props.desc}</h4>
             </div>
             <div className = "scoreBtn">
-        <h3>{props.score}</h3>
+        <h3 data-testid = {props.title}>{props.score}</h3>
       {props.button && <button className = {`selectBtn${disabled}-${color}`} isdisabled = {disabled} onClick = {props.handleClick}>Select</button>}
             </div>
         </div>

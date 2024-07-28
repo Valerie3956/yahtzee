@@ -11,7 +11,7 @@ export default function Die(props){
 
     return(
         <div>
-        <h1 className = {`${change}-${color}`} onClick = {() => props.handleClick(props.id)}>{props.number}</h1>
+        <h1 data-testid = {props.id} className = {`${change}-${color}`} onClick = {() => props.handleClick(props.id)}>{props.number}</h1>
         </div>
     )
 }
